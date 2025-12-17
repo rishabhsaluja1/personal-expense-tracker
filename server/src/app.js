@@ -1,8 +1,12 @@
 const express = require("express");
 const cors = require("cors");
 
+const budgetRoutes = require("./routes/budget.routes");
+const analyticsRoutes = require("./routes/analytics.routes");
+const transactionRoutes = require("./routes/transaction.routes");
 const authRoutes = require("./routes/auth.routes");
 const authenticate = require("./middleware/auth.middleware");
+
 
 const app = express();
 
@@ -15,6 +19,9 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth",authRoutes);
+app.use("/transactions", transactionRoutes);
+app.use("/analytics", analyticsRoutes);
+app.use("/budgets", budgetRoutes);
 
 
 app.get("/protected", authenticate, (req, res) => {
